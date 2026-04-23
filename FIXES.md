@@ -14,3 +14,4 @@
 
 7. frontend/app.js, Lines 13 and 22: There was no logging for failed API calls, which made it difficult to debug issues related to Docker networking. This was fixed by adding `console.error(err.message)` to log the error messages when API calls fail.
 
+8. api/Dockerfile, Line 3: The `pip install` command was not pinned to a specific version, which could lead to non-reproducible builds if dependencies change. This was fixed by adding `RUN pip install --no-cache-dir "pip==24.0"` before installing the requirements to ensure a consistent pip version across builds.
