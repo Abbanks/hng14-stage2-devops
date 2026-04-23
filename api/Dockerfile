@@ -11,7 +11,7 @@ WORKDIR /app
 RUN addgroup --system appgroup && adduser --system --group appuser
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl=7.88.1-10+deb12u5 \
+    curl \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /root/.local /home/appuser/.local
