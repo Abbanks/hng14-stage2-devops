@@ -1,13 +1,18 @@
 FROM python:3.11-slim AS builder
 WORKDIR /app
-RUN pip install --no-cache-dir --upgrade pip
+
+RUN pip install --no-cache-dir pip==24.0
 COPY requirements.txt .
-RUN pip install --no-cache-dir --user -r requirements.txt
+RUN pip install --no-cache-dir --requirement requirements.txt
 
 FROM python:3.11-slim
 WORKDIR /app
 
 RUN addgroup --system appgroup && adduser --system --group appuser
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl && \
+    rm -rf /var/lib/apt/lists/*
+    
 COPY --from=builder /root/.local /home/appuser/.local
 COPY . .
 
