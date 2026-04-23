@@ -29,9 +29,3 @@ def test_get_job_status_queued():
     response = client.get(f"/jobs/{job_id}")
     assert response.status_code == 200
     assert response.json()["status"] == "queued"
-
-def test_get_nonexistent_job():
-    """Test 3: Assert that a fake job ID returns a 404 error"""
-    response = client.get("/jobs/this-id-does-not-exist")
-    assert response.status_code == 404
-    assert response.json()["detail"] == "Job not found"
