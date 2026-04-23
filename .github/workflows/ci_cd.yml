@@ -62,29 +62,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+      - name: Build Frontend Image
+        run: docker build -t frontend:latest ./frontend
       - name: Scan Frontend Image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'localhost:5000/frontend:latest'
+          image-ref: 'frontend:latest'
           format: 'sarif'
           output: 'trivy-frontend.sarif'
           severity: 'CRITICAL'
           exit-code: '1'
 
+      - name: Build API Image
+        run: docker build -t api:latest ./api
       - name: Scan API Image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'localhost:5000/api:latest'
+          image-ref: 'api:latest'
           format: 'sarif'
           output: 'trivy-api.sarif'
           severity: 'CRITICAL'
           exit-code: '1'
 
+      - name: Build Worker Image
+        run: docker build -t worker:latest ./worker
       - name: Scan Worker Image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'localhost:5000/worker:latest'
+          image-ref: 'worker:latest'
           format: 'sarif'
           output: 'trivy-worker.sarif'
           severity: 'CRITICAL'
