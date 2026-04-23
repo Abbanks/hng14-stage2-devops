@@ -14,10 +14,3 @@
 
 7. frontend/app.js, Lines 13 and 22: There was no logging for failed API calls, which made it difficult to debug issues related to Docker networking. This was fixed by adding `console.error(err.message)` to log the error messages when API calls fail.
 
-8. index.html, Line 28: The fetch logic for polling job status was not correctly using the relative path, which could lead to issues when the frontend is served behind a Node proxy. This was fixed by verifying that `pollJob` uses the relative path `/status/`, which the Node proxy can handle correctly.
-
-9. Dockerfile, N/A: The Dockerfile was missing a non-root user, which is a security best practice. This was fixed by adding `USER appuser` and setting directory ownership permissions for all services to enhance security.
-
-10. Dockerfile, N/A: The Docker images were large due to the inclusion of build tools and unnecessary files. This was fixed by implementing multi-stage builds for both the frontend and backend, which allows for a slimmer production image by only including the necessary runtime dependencies.
-
-11. .env.example, Lines 1-2: The Redis connection parameters were missing from the example environment file, which could lead to confusion for users setting up the application. This was fixed by adding `REDIS_PORT=6379` and `REDIS_PASSWORD=<password>` to the `.env.example` file, providing clear guidance on how to configure Redis for the application.
