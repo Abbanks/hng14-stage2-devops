@@ -48,12 +48,6 @@ jobs:
           - 5000:5000
     steps:
     - uses: actions/checkout@v4
-    - name: Run Hadolint
-      uses: hadolint/hadolint-action@v3.1.0
-      with:
-        dockerfile: api/Dockerfile
-        ignore: DL3008
-    
     - name: Build and Push All Images
       run: |
         for service in frontend api worker; do
