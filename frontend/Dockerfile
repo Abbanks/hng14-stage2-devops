@@ -10,9 +10,6 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 COPY --from=builder /app/node_modules ./node_modules
 COPY . .
 
-COPY app.js .
-COPY public/ ./public/
-
 RUN chown -R appuser:appgroup /app
 USER appuser
 
