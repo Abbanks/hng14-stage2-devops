@@ -2,6 +2,7 @@ import redis
 import time
 import os
 import signal
+import sys
 
 REDIS_HOST = os.getenv("REDIS_HOST", "redis")
 REDIS_PORT = os.getenv("REDIS_PORT", 6379)
