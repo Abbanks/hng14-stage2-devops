@@ -1,0 +1,9 @@
+# .dockerignore
+.env
+.git
+.gitignore
+__pycache__
+node_modules
+*.log
+.vscode
+.idea
